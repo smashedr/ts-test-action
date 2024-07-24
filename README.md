@@ -20,7 +20,7 @@
   - name: "TS Test Action"
     uses: smashedr/ts-test-action@master
     with:
-      body: ${{ github.event.issue.body }}
+      milliseconds: 2000
 ```
 
 ## Outputs
@@ -40,3 +40,16 @@
     run: |
       echo '${{ steps.test.outputs.time }}'
 ```
+
+# Development
+
+1. Install `act`: https://nektosact.com/installation/index.html
+2. Run `npm run build:watch`
+3. In another terminal, run `act -j test`
+
+For advanced using with things like secrets, variables and context see: https://nektosact.com/usage/index.html
+
+You should also review the options from `act --help`
+
+Note, the `.env`, `.secrets` and `.vars` files are automatically sourced with no extra options.
+To source `event.json` you need to run act with `act -e event.json`
