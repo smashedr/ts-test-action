@@ -3,9 +3,6 @@ import * as github from '@actions/github'
 
 import { wait } from './wait'
 
-/**
- * The main function for the action.
- */
 ;(async () => {
     try {
         // console.log('github.context:', github.context)
