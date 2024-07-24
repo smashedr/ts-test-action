@@ -31,12 +31,12 @@
 
 ```yaml
   - name: "TS Test Action"
-    id: update
+    id: test
     uses: smashedr/ts-test-action@master
     with:
       milliseconds: 2000
 
   - name: "Echo Output"
     run: |
-      echo '${{ steps.update.outputs.time }}'
+      echo '${{ steps.test.outputs.time }}'
 ```

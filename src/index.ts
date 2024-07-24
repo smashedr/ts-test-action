@@ -3,15 +3,12 @@ import { wait } from './wait'
 
 /**
  * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
  */
-export async function run(): Promise<void> {
+;(async () => {
     try {
-        console.log('STARTING')
-        const ms: string = core.getInput('milliseconds')
+        const ms: string = core.getInput('milliseconds', { required: true })
 
-        // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-        core.info(`Waiting ${ms} milliseconds ...`)
+        core.info(`Waiting ${ms} milliseconds...`)
 
         // Log the current timestamp, wait, then log the new timestamp
         core.info(new Date().toTimeString())
@@ -20,10 +17,10 @@ export async function run(): Promise<void> {
 
         // Set outputs for other workflow steps to use
         core.setOutput('time', new Date().toTimeString())
-    } catch (error) {
-        // Fail the workflow run if an error occurs
-        if (error instanceof Error) core.setFailed(error.message)
-    }
-}
 
-run()
+        core.info(`\u001b[32;1mFinished Success`)
+    } catch (error) {
+        core.debug(error)
+        core.setFailed(error.message)
+    }
+})()

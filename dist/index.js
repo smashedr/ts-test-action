@@ -24945,25 +24945,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.run = run;
 const core = __importStar(__nccwpck_require__(2186));
 const wait_1 = __nccwpck_require__(5259);
-async function run() {
+(async () => {
     try {
-        console.log('STARTING');
-        const ms = core.getInput('milliseconds');
-        core.info(`Waiting ${ms} milliseconds ...`);
+        const ms = core.getInput('milliseconds', { required: true });
+        core.info(`Waiting ${ms} milliseconds...`);
         core.info(new Date().toTimeString());
         await (0, wait_1.wait)(parseInt(ms, 10));
         core.info(new Date().toTimeString());
         core.setOutput('time', new Date().toTimeString());
+        core.info(`\u001b[32;1mFinished Success`);
     }
     catch (error) {
-        if (error instanceof Error)
-            core.setFailed(error.message);
+        core.debug(error);
+        core.setFailed(error.message);
     }
-}
-run();
+})();
 
 
 /***/ }),
