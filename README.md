@@ -27,6 +27,13 @@
 - [Contributing](#Contributing)
 - [Development](#Development)
 
+TypeScript Test Action Template.
+
+- JavaScript: https://github.com/smashedr/js-test-action
+- TypeScript: https://github.com/smashedr/ts-test-action
+- Docker: https://github.com/smashedr/docker-test-action
+- Python: https://github.com/smashedr/py-test-action
+
 ## Inputs
 
 | input        | required | default | description          |

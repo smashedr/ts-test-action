@@ -7,6 +7,8 @@
   - [Testing](#Testing)
 - [Actions Development](#Actions-Development)
 
+This is a basic contributing guide and is a work in progress.
+
 ## Workflow
 
 1. Fork the repository.
