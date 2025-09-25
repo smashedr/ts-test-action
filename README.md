@@ -9,39 +9,39 @@
 
 # TypeScript Test Action
 
-* [Inputs](#Inputs)
-* [Outputs](#Outputs)
-* [Development](#Development)
+- [Inputs](#Inputs)
+- [Outputs](#Outputs)
+- [Development](#Development)
 
 ## Inputs
 
 | input        | required | default | description          |
-|--------------|----------|---------|----------------------|
+| ------------ | -------- | ------- | -------------------- |
 | milliseconds | No       | 1000    | Milliseconds to wait |
 
 ```yaml
-  - name: "TS Test Action"
-    uses: smashedr/ts-test-action@master
-    with:
-      milliseconds: 2000
+- name: 'TS Test Action'
+  uses: smashedr/ts-test-action@master
+  with:
+    milliseconds: 2000
 ```
 
 ## Outputs
 
 | output | description    |
-|--------|----------------|
+| ------ | -------------- |
 | time   | Resulting Time |
 
 ```yaml
-  - name: "TS Test Action"
-    id: test
-    uses: smashedr/ts-test-action@master
-    with:
-      milliseconds: 2000
+- name: 'TS Test Action'
+  id: test
+  uses: smashedr/ts-test-action@master
+  with:
+    milliseconds: 2000
 
-  - name: "Echo Output"
-    run: |
-      echo '${{ steps.test.outputs.time }}'
+- name: 'Echo Output'
+  run: |
+    echo '${{ steps.test.outputs.time }}'
 ```
 
 # Development
