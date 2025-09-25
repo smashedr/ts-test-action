@@ -37,8 +37,8 @@ jobs:
 
       - name: "Verify Outputs"
         run: |
-          echo time: ${{ steps.test.outputs.time }}
-          if [ -z "${{ steps.test.outputs.time }}" ];then
+          echo time: '${{ steps.test.outputs.time }}'
+          if [ -z '${{ steps.test.outputs.time }}' ];then
             echo "Output Invalid"
             exit 1
           fi
