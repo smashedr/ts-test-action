@@ -22,6 +22,5 @@ export default defineConfig({
     rules: {
         'no-undef': 'off',
         'no-extra-semi': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
     },
 })
