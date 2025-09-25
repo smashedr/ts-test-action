@@ -1,8 +1,9 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-import { wait } from './wait'
+import { wait } from './wait.js'
 
+// main
 ;(async () => {
     try {
         // console.log('github.context:', github.context)
@@ -26,8 +27,10 @@ import { wait } from './wait'
 
         core.info(`\u001b[32;1mFinished Success`)
     } catch (e) {
-        core.debug(e)
-        core.info(e.message)
-        core.setFailed(e.message)
+        console.log(e)
+        if (e instanceof Error) core.setFailed(e.message)
+        // const msg = e instanceof Error ? e.message : String(e)
+        // core.info(msg)
+        // core.setFailed(msg)
     }
 })()

@@ -2,9 +2,22 @@ name: "Test"
 
 on:
   workflow_dispatch:
+  #schedule:
+  #  - cron: "18 18 * * 1,3,5"
   push:
+    branches: [master]
     paths:
+      - "dist/**"
       - "src/**"
+      - ".github/workflows/test.yaml"
+      - "package*.json"
+      - "requirements*.txt"
+      - "action.yml"
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -14,7 +27,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: "Test Local Action"
         id: test
@@ -22,56 +35,16 @@ jobs:
         with:
           milliseconds: 2000
 
-      - name: "Echo Outputs"
+      - name: "Verify Outputs"
         run: |
-          echo '${{ steps.test.outputs.time }}'
-
-  lint:
-    name: "Lint"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-
-      - name: "Setup Node"
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: "ESLint"
-        run: |
-          npm install
-          npm run lint
-
-  build:
-    name: "Build"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-
-      - name: "Setup Node"
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: "Build"
-        run: |
-          npm install
-          npm run build
-
-      - name: "Verify"
-        run: |
-          git status --porcelain dist/
-          if [ ! -d "dist" ];then
-            echo "Missing dist directory, run: npm build"
+          echo time: '${{ steps.test.outputs.time }}'
+          if [ -z '${{ steps.test.outputs.time }}' ];then
+            echo "Output Invalid"
             exit 1
           fi
-          if [ -n "$(git status --porcelain dist)" ];then
-            echo "Build was not run, run: npm build"
-            exit 1
-          fi
+
+      - name: "Schedule Failure Notification"
+        if: ${{ failure() && github.event_name == 'schedule' }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}

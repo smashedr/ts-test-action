@@ -1,12 +1,16 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "module": "NodeNext",
-    "noImplicitAny": true,
     "outDir": "./dist",
+    "module": "NodeNext",
+    "target": "ES2022",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "removeComments": true,
-    "skipLibCheck": true,
-    "target": "ES2022"
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }
