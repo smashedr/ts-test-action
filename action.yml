@@ -8,7 +8,6 @@ branding:
 inputs:
   milliseconds:
     description: "Your input description here"
-    required: false
     default: "1000"
 
 outputs:
